@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
+body{
+    background-color: rgb(250, 252, 204);
+}
+
 .mbtiLayout{
     width: 100vw;
     display: flex;
@@ -19,6 +25,14 @@
     flex-direction: column;
     align-items: center;
 }
+.startLogo img{
+    margin-bottom: 50px;
+}
 .startBtn{
-
+    width: 200px;
+    font-size: 2rem;
+    border-radius: 25px;
+    font-family: 'Gamja Flower', sans-serif;
+    color: rgb(231, 240, 63);
+    background-color: black;
 }
