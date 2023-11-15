@@ -81,6 +81,7 @@ function App() {
       : page <= qList.length?
       <div className='questionLayout'>
         <div className='mbtiTitle'>
+          <div>MBTI 테스트</div>
           <div>{`${page} / ${qList.length}`}</div>
         </div>
           {qList.map((val, idx) => 

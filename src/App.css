@@ -42,10 +42,20 @@ body{
     flex-direction: column;
     background-color: white;
     width: 100%;
+    height: 100%;
+    max-width: 900px;
+    overflow: hidden;
 }
 
 .mbtiTitle{
-
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 2.5rem;
+    font-family: 'Gamja Flower', sans-serif;
 }
 
 .questionList{
@@ -53,5 +63,26 @@ body{
     height: 100%;
     overflow: scroll;
     scrollbar-width: none;
-    background-color: rgb(64, 64, 232);
+    background-color: rgb(243, 249, 129);
+    align-items: center;
+}
+.questionList::-webkit-scrollbar{
+    display: none;
+}
+
+.questionItemLayout{
+    display: flex;
+    width: 80%;
+    height: 30%;
+    background-color: white;
+    justify-content: center;
+    margin: 20px;
+}
+
+.answerItemLayout{
+    display: flex;
+    width: 80%;
+    height: 30%;
+    background-color: white;
+    justify-content: center;
 }
