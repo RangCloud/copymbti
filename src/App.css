@@ -36,3 +36,22 @@ body{
     color: rgb(231, 240, 63);
     background-color: black;
 }
+
+.questionLayout{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+}
+
+.mbtiTitle{
+
+}
+
+.questionList{
+    flex-direction: column;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+    background-color: rgb(64, 64, 232);
+}

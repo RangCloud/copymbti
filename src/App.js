@@ -72,17 +72,27 @@ function App() {
   return (
     <div className="mbtiLayout">
       {page === 0 ? 
-      <div>
         <div className='startLayout'>
           <div className='startLogo'>
             <img src={mbtiImg}/>
-            <button onClick={()=>setPage(1)} className='startBtn'>Start!</button>
           </div>
+          <button onClick={()=>setPage(1)} className='startBtn'>Start!</button>
         </div>
-      </div>
       : page <= qList.length?
-      <div>
-        <div>(`${page} / ${qList.length}`)</div>
+      <div className='questionLayout'>
+        <div className='mbtiTitle'>
+          <div>{`${page} / ${qList.length}`}</div>
+        </div>
+          {qList.map((val, idx) => 
+            <div className='questionList' style={{display:page === idx + 1 ? 'flex' : 'none'}}>
+              <div className='questionItemLayout'>
+                질문
+              </div>
+              <div className='answerItemLayout'>
+                답변
+              </div>
+            </div>
+          )}
       </div>
       :
       <div>
