@@ -10,6 +10,7 @@ function App() {
   }
   
   useEffect(()=>{
+    console.log(mbtiContents.mbti);
     setVh()
 
     function onResize(){
@@ -70,7 +71,7 @@ function App() {
   ])
 
   const handleOnChange = (type, idx) => {
-    let mL = mbtiList;
+    let mL = [...mbtiList];
     for(let i = 0; i < mL.length; i++){
       if(mL[i].name === type){
         mL[i].count = mL[i].count + 1
@@ -85,9 +86,12 @@ function App() {
     }
   }
 
-  const [mbtiContents, setMbtiContents] = useState([]);
+  const [mbtiContents, setMbtiContents] = useState(
+    {mbti:'', content:[]}
+  );
 
   function setMbti(){
+    let ls = mbtiList;
     let mbtiCodeList = [
       {mbti:'ESTP', content:['1','1','1']},
       {mbti:'ESTJ', content:['1','1','1']},
@@ -108,21 +112,25 @@ function App() {
     ]
 
     let IorE = 
-      mbtiList.find(function(data){return data.name === 'I'}).count >
-      mbtiList.find(function(data){return data.name === 'E'}).count ? 'I' : 'E'
+      ls.find(function(data){return data.name === 'I'}).count >
+      ls.find(function(data){return data.name === 'E'}).count ? 'I' : 'E'
     let SorN = 
-      mbtiList.find(function(data){return data.name === 'S'}).count >
-      mbtiList.find(function(data){return data.name === 'N'}).count ? 'S' : 'N'
+      ls.find(function(data){return data.name === 'S'}).count >
+      ls.find(function(data){return data.name === 'N'}).count ? 'S' : 'N'
     let ForT = 
-      mbtiList.find(function(data){return data.name === 'F'}).count >
-      mbtiList.find(function(data){return data.name === 'T'}).count ? 'F' : 'T'
+      ls.find(function(data){return data.name === 'F'}).count >
+      ls.find(function(data){return data.name === 'T'}).count ? 'F' : 'T'
     let PorJ = 
-      mbtiList.find(function(data){return data.name === 'P'}).count >
-      mbtiList.find(function(data){return data.name === 'J'}).count ? 'P' : 'J'
+      ls.find(function(data){return data.name === 'P'}).count >
+      ls.find(function(data){return data.name === 'J'}).count ? 'P' : 'J'
+
+    console.log(IorE);
 
     let mbti = IorE + SorN + ForT + PorJ;
 
-    setMbtiContents(mbtiCodeList.filter(val => val.mbti === mbti)[0])
+    console.log(mbti);
+
+    setMbtiContents(mbtiCodeList.filter(val => val.mbti === mbti)[0]);
   }
 
   return (
