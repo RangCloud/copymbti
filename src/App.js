@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import mbtiImg from './freeImg/mbti.png'
+import mbtiImg from './freeImg/mbti.png';
 
 function App() {
 
@@ -81,8 +81,48 @@ function App() {
     setPage(page + 1);
 
     if(idx + 1 === qList.length){
-      console.log("결과보러가기");
+      setMbti();
     }
+  }
+
+  const [mbtiContents, setMbtiContents] = useState([]);
+
+  function setMbti(){
+    let mbtiCodeList = [
+      {mbti:'ESTP', content:['1','1','1']},
+      {mbti:'ESTJ', content:['1','1','1']},
+      {mbti:'ESFP', content:['1','1','1']},
+      {mbti:'ESFJ', content:['1','1','1']},
+      {mbti:'ENTP', content:['1','1','1']},
+      {mbti:'ENTJ', content:['1','1','1']},
+      {mbti:'ENFP', content:['1','1','1']},
+      {mbti:'ENFJ', content:['1','1','1']},
+      {mbti:'ISTP', content:['1','1','1']},
+      {mbti:'ISPJ', content:['1','1','1']},
+      {mbti:'ISFP', content:['1','1','1']},
+      {mbti:'ISFJ', content:['1','1','1']},
+      {mbti:'INTP', content:['1','1','1']},
+      {mbti:'INTJ', content:['1','1','1']},
+      {mbti:'INFP', content:['1','1','1']},
+      {mbti:'INFJ', content:['1','1','1']},
+    ]
+
+    let IorE = 
+      mbtiList.find(function(data){return data.name === 'I'}).count >
+      mbtiList.find(function(data){return data.name === 'E'}).count ? 'I' : 'E'
+    let SorN = 
+      mbtiList.find(function(data){return data.name === 'S'}).count >
+      mbtiList.find(function(data){return data.name === 'N'}).count ? 'S' : 'N'
+    let ForT = 
+      mbtiList.find(function(data){return data.name === 'F'}).count >
+      mbtiList.find(function(data){return data.name === 'T'}).count ? 'F' : 'T'
+    let PorJ = 
+      mbtiList.find(function(data){return data.name === 'P'}).count >
+      mbtiList.find(function(data){return data.name === 'J'}).count ? 'P' : 'J'
+
+    let mbti = IorE + SorN + ForT + PorJ;
+
+    setMbtiContents(mbtiCodeList.filter(val => val.mbti === mbti)[0])
   }
 
   return (
@@ -101,7 +141,8 @@ function App() {
           <div>{`${page} / ${qList.length}`}</div>
         </div>
           {qList.map((val, idx) => 
-            <div className='questionList' style={{display:page === idx + 1 ? 'flex' : 'none'}}>
+            <div className='questionList' style={{display:page === idx + 1 ? 'flex' : 'none'}} key={idx}>
+              {console.log(mbtiList)}
               <div className='questionItemLayout'>
                 {val.q.map((qval, qidx)=>
                   <div key={qidx}>
@@ -120,8 +161,20 @@ function App() {
           )}
       </div>
       :
-      <div>
-        결과페이지
+      <div className='questionLayout'>
+        <div className='mbtiTitle'>
+          <div>MBTI 테스트</div>
+          <div className='reStart' onClick={() => window.location.reload()}>다시하러하기</div>
+        </div>
+            <div className='questionList' style={{display:'flex'}}>
+              <div className='questionItemLayout'>
+                  <div className='resultBox'>
+                    <div>당신의 MBTI는 {mbtiContents.mbti} 입니다.</div>
+                  </div>
+              </div>
+              
+            </div>
+          
       </div>
       }
     </div>

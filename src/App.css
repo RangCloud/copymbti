@@ -103,3 +103,11 @@ body{
     margin: 10px;
     cursor: pointer;
 }
+
+.reStart{
+    font-size: 1.4rem;
+    border: 1px solid gray;
+    border-radius: 15px;
+    padding: 5px;
+    background-color: #ffc0cb;
+}
