@@ -69,6 +69,22 @@ function App() {
     {name:'T', count: 0},{name:'F', count: 0},{name:'P', count: 0},{name:'J', count: 0}
   ])
 
+  const handleOnChange = (type, idx) => {
+    let mL = mbtiList;
+    for(let i = 0; i < mL.length; i++){
+      if(mL[i].name === type){
+        mL[i].count = mL[i].count + 1
+      }
+    }
+
+    setMbtiList(mL);
+    setPage(page + 1);
+
+    if(idx + 1 === qList.length){
+      console.log("결과보러가기");
+    }
+  }
+
   return (
     <div className="mbtiLayout">
       {page === 0 ? 
@@ -87,10 +103,18 @@ function App() {
           {qList.map((val, idx) => 
             <div className='questionList' style={{display:page === idx + 1 ? 'flex' : 'none'}}>
               <div className='questionItemLayout'>
-                질문
+                {val.q.map((qval, qidx)=>
+                  <div key={qidx}>
+                    <div>{qval}</div>
+                  </div>
+                )}
               </div>
               <div className='answerItemLayout'>
-                답변
+              {val.a.map((aval, aidx)=>
+                  <div key={aidx} className='answerBox' onClick={ () => handleOnChange(aval.type)}>
+                    <div>{aval.text}</div>
+                  </div>
+                )}
               </div>
             </div>
           )}
