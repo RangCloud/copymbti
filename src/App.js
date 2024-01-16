@@ -10,7 +10,6 @@ function App() {
   }
   
   useEffect(()=>{
-    console.log(mbtiContents.mbti);
     setVh()
 
     function onResize(){
@@ -90,6 +89,14 @@ function App() {
     {mbti:'', content:[]}
   );
 
+  useEffect(() => {
+    console.log(mbtiContents);
+  
+    if (page === qList.length) {
+      setMbti();
+    }
+  }, [mbtiContents, page]);
+
   function setMbti(){
     let ls = mbtiList;
     let mbtiCodeList = [
@@ -124,13 +131,14 @@ function App() {
       ls.find(function(data){return data.name === 'P'}).count >
       ls.find(function(data){return data.name === 'J'}).count ? 'P' : 'J'
 
-    console.log(IorE);
-
     let mbti = IorE + SorN + ForT + PorJ;
 
-    console.log(mbti);
+    let matchingMbti = mbtiCodeList.find((val) => val.mbti === mbti);
 
-    setMbtiContents(mbtiCodeList.filter(val => val.mbti === mbti)[0]);
+    console.log('mbti:', mbti);
+    console.log('matchingMbti:', matchingMbti);
+  
+    setMbtiContents(matchingMbti || { mbti: '', content: [] });
   }
 
   return (
@@ -150,7 +158,6 @@ function App() {
         </div>
           {qList.map((val, idx) => 
             <div className='questionList' style={{display:page === idx + 1 ? 'flex' : 'none'}} key={idx}>
-              {console.log(mbtiList)}
               <div className='questionItemLayout'>
                 {val.q.map((qval, qidx)=>
                   <div key={qidx}>
@@ -177,7 +184,7 @@ function App() {
             <div className='questionList' style={{display:'flex'}}>
               <div className='questionItemLayout'>
                   <div className='resultBox'>
-                    <div>당신의 MBTI는 {mbtiContents.mbti} 입니다.</div>
+                    <div>당신의 MBTI는 {mbtiContents.mbti || "결과없음"} 입니다.</div>
                   </div>
               </div>
               
