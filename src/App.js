@@ -90,8 +90,6 @@ function App() {
   );
 
   useEffect(() => {
-    console.log(mbtiContents);
-  
     if (page === qList.length) {
       setMbti();
     }
@@ -134,9 +132,6 @@ function App() {
     let mbti = IorE + SorN + ForT + PorJ;
 
     let matchingMbti = mbtiCodeList.find((val) => val.mbti === mbti);
-
-    console.log('mbti:', mbti);
-    console.log('matchingMbti:', matchingMbti);
   
     setMbtiContents(matchingMbti || { mbti: '', content: [] });
   }
