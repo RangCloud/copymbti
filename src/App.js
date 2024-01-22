@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import mbtiImg from './freeImg/mbti.png';
+import resultImg from './freeImg/ghost-8250317_1280.png';
 
 function App() {
 
@@ -21,6 +22,8 @@ function App() {
   },[])
 
   const [page, setPage] = useState(0);
+
+  const [loading, setLoading] = useState(false);
 
   const qList = [
           {q : ['1. 오랜만에 친구와 만나 놀던 도중, 친구의 친구가 같이 놀아도 된다고 물어본다면..?'],
@@ -59,9 +62,6 @@ function App() {
           {q : ['12. 여행 갈 때 당신은??'],
             a : [{ type : 'P', text : '대략적으로 코스만 짬 그것도 안지킴'},
                   { type : 'J', text : '시간단위 분단위별로 계획 다 짬'}]},
-
-          {q : ['테스트가 모두 끝났어! 결과 보러 갈래??'],
-            a : [{ type : '', text : '결과 보러 가기'}]}
   ]
 
   const [mbtiList, setMbtiList] = useState([
@@ -80,20 +80,18 @@ function App() {
     setMbtiList(mL);
     setPage(page + 1);
 
-    if(idx + 1 === qList.length){
-      setMbti();
+    if (page === qList.length) {
+      setLoading(true);
+      setTimeout(() => {
+        setMbti();
+        setLoading(false);
+      }, 3000);
     }
   }
 
   const [mbtiContents, setMbtiContents] = useState(
     {mbti:'', content:[]}
   );
-
-  useEffect(() => {
-    if (page === qList.length) {
-      setMbti();
-    }
-  }, [mbtiContents, page]);
 
   function setMbti(){
     let ls = mbtiList;
@@ -136,6 +134,12 @@ function App() {
     setMbtiContents(matchingMbti || { mbti: '', content: [] });
   }
 
+  useEffect(() => {
+    if (page === qList.length) {
+      setMbti();
+    }
+  }, [mbtiContents, page]);
+
   return (
     <div className="mbtiLayout">
       {page === 0 ? 
@@ -177,14 +181,20 @@ function App() {
           <div className='reStart' onClick={() => window.location.reload()}>다시하러하기</div>
         </div>
             <div className='questionList' style={{display:'flex'}}>
-              <div className='questionItemLayout'>
-                  <div className='resultBox'>
-                    <div>당신의 MBTI는 {mbtiContents.mbti || "결과없음"} 입니다.</div>
+              <div className="questionItemLayout">
+                {loading ? (
+                  <div className="loadingScreen">
+                    <img className="loadingImg" src={resultImg}/>
+                    <p>잠시만 기다려주세요!</p>
                   </div>
+                ) : (
+                  <div className="resultBox">
+                    <div>당신의 MBTI는 {mbtiContents.mbti || "결과없음"} 입니다.</div>
+                    <p>{mbtiContents.mbti || "결과없음"}는 </p>
+                  </div>
+                )}
               </div>
-              
             </div>
-          
       </div>
       }
     </div>
