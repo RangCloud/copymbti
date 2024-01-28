@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import mbtiImg from './freeImg/mbti.png';
 import resultImg from './freeImg/ghost-8250317_1280.png';
+import explainMbti from './dummy.json';
 
 function App() {
 
