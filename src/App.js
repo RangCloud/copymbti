@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import mbtiImg from './freeImg/mbti.png';
 import resultImg from './freeImg/ghost-8250317_1280.png';
-import explainMbti from './dummy.json';
 
 function App() {
 
@@ -91,28 +90,28 @@ function App() {
   }
 
   const [mbtiContents, setMbtiContents] = useState(
-    {mbti:'', content:[]}
+    {mbti:'', content:[], description:''}
   );
 
   function setMbti(){
     let ls = mbtiList;
     let mbtiCodeList = [
-      {mbti:'ESTP', content:['1','1','1']},
-      {mbti:'ESTJ', content:['1','1','1']},
-      {mbti:'ESFP', content:['1','1','1']},
-      {mbti:'ESFJ', content:['1','1','1']},
-      {mbti:'ENTP', content:['1','1','1']},
-      {mbti:'ENTJ', content:['1','1','1']},
-      {mbti:'ENFP', content:['1','1','1']},
-      {mbti:'ENFJ', content:['1','1','1']},
-      {mbti:'ISTP', content:['1','1','1']},
-      {mbti:'ISPJ', content:['1','1','1']},
-      {mbti:'ISFP', content:['1','1','1']},
-      {mbti:'ISFJ', content:['1','1','1']},
-      {mbti:'INTP', content:['1','1','1']},
-      {mbti:'INTJ', content:['1','1','1']},
-      {mbti:'INFP', content:['1','1','1']},
-      {mbti:'INFJ', content:['1','1','1']},
+      {mbti:'ESTP', content:['1','1','1'], result: '사업가형', description:'위험을 기꺼이 감수하는 성격으로, 영리하고 에너지 넘치며 관찰력이 뛰어난 사업가입니다.'},
+      {mbti:'ESTJ', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ESFP', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ESFJ', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ENTP', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ENTJ', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ENFP', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ENFJ', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ISTP', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ISPJ', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ISFP', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'ISFJ', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'INTP', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'INTJ', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'INFP', content:['1','1','1'], result: '', description:'asdasd'},
+      {mbti:'INFJ', content:['1','1','1'], result: '', description:'asdasd'},
     ]
 
     let IorE = 
@@ -190,8 +189,9 @@ function App() {
                   </div>
                 ) : (
                   <div className="resultBox">
-                    <div>당신의 MBTI는 {mbtiContents.mbti || "결과없음"} 입니다.</div>
-                    <p>{mbtiContents.mbti || "결과없음"}는 </p>
+                    <div>당신의 MBTI는 {mbtiContents.mbti || "결과없음"}</div>
+                    <p>{mbtiContents.mbti || "결과없음"}는 {mbtiContents.result}입니다!</p>
+                    <div className='introBox'>{mbtiContents.description}</div>
                   </div>
                 )}
               </div>
